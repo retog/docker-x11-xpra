@@ -13,7 +13,7 @@ Copy public key
     
     docker exec -i x11-xpra /bin/bash -c 'cat > /root/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 
-Start xclok vithout xpra
+Start xclock without xpra
 
    ssh -X -p 2020 root@localhost xclock
 
@@ -25,7 +25,7 @@ And attach to it with
   
    xpra --ssh="ssh -p 2020" attach ssh:root@localhost:100
 
-Or start Xnest as dispayl 200 on a new xpra display 111
+Or start Xnest as display 200 on a new xpra display 111
 
    ssh -X -p 2020 root@localhost xpra start :111 --start-child=\"Xnest :200 -ac -geometry 800x600+24\"
 
