@@ -1,6 +1,6 @@
 # docker-x11-xpra
 A docker image proving a basis for X applications accessible via ssh with or 
-without xpra and optionally within Xnest/ratpoison
+without xpra and optionally within Xephyr/i3
 
 
 ## Usage example
@@ -15,31 +15,31 @@ Copy public key
 
 Start xclock without xpra
 
-   ssh -X -p 2020 root@localhost xclock
+    ssh -X -p 2020 root@localhost xclock
 
 Or start xclock as xpra process 100
 
-   ssh -X -p 2020 root@localhost xpra start :100 --start-child=xclock
+    ssh -X -p 2020 root@localhost xpra start :100 --start-child=xclock
 
 And attach to it with
   
-   xpra --ssh="ssh -p 2020" attach ssh:root@localhost:100
+    xpra --ssh="ssh -p 2020" attach ssh:root@localhost:100
 
-Or start Xnest as display 200 on a new xpra display 111
+Or start Xephyr as display 200 on a new xpra display 111
 
-   ssh -X -p 2020 root@localhost xpra start :111 --start-child=\"Xnest :200 -ac -geometry 800x600+24\"
+    ssh -X -p 2020 root@localhost xpra start :111 --start-child=\"Xephyr -ac -br -noreset -screen 800x600 :200\" &
 
-Start ratpoison as display manager
+Start i3 as display manager
 
-   ssh -X -p 2020 root@localhost DISPLAY=:200 ratpoison & 
+    ssh -X -p 2020 root@localhost DISPLAY=:200 i3 & 
 
-And xcloxk
+And xclock
 
-   ssh -X -p 2020 root@localhost DISPLAY=:200 xclock &
+    ssh -X -p 2020 root@localhost DISPLAY=:200 xclock &
 
 And attach to it with
   
-   xpra --ssh="ssh -p 2020" attach ssh:root@localhost:111
+    xpra --ssh="ssh -p 2020" attach ssh:root@localhost:111
 
 You may need to adapt the keyboard layout
 

@@ -4,7 +4,7 @@ EXPOSE 22
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server \
     xpra x11-apps xterm \
-    xnest ratpoison
+    xserver-xephyr i3
 
 # Create OpenSSH privilege separation directory
 RUN mkdir /var/run/sshd 
