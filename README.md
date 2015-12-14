@@ -11,37 +11,37 @@ Run with
 
 Copy public key
     
-    docker exec -i x11-xpra /bin/bash -c 'cat > /root/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+    docker exec -i x11-xpra /bin/bash -c 'cat > /home/user/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 
 Start xclock without xpra
 
-    ssh -X -p 2020 root@localhost xclock
+    ssh -X -p 2020 user@localhost xclock
 
 Or start xclock as xpra process 100
 
-    ssh -X -p 2020 root@localhost xpra start :100 --start-child=xclock
+    ssh -X -p 2020 user@localhost xpra start :100 --start-child=xclock
 
 And attach to it with
   
-    xpra --ssh="ssh -p 2020" attach ssh:root@localhost:100
+    xpra --ssh="ssh -p 2020" attach ssh:user@localhost:100
 
 Or start Xephyr as display 200 on a new xpra display 111
 
-    ssh -X -p 2020 root@localhost xpra start :111 --start-child=\"Xephyr -ac -br -noreset -screen 800x600 :200\" &
+    ssh -X -p 2020 user@localhost xpra start :111 --start-child=\"Xephyr -ac -br -noreset -screen 800x600 :200\" &
 
 Start i3 as display manager
 
-    ssh -X -p 2020 root@localhost DISPLAY=:200 i3 & 
+    ssh -X -p 2020 user@localhost DISPLAY=:200 i3 & 
 
 And xclock
 
-    ssh -X -p 2020 root@localhost DISPLAY=:200 xclock &
+    ssh -X -p 2020 user@localhost DISPLAY=:200 xclock &
 
 And attach to it with
   
-    xpra --ssh="ssh -p 2020" attach ssh:root@localhost:111
+    xpra --ssh="ssh -p 2020" attach ssh:user@localhost:111
 
 You may need to adapt the keyboard layout
 
-    ssh -X -p 2020 root@localhost DISPLAY=:200 setxkbmap -layout ch
+    ssh -X -p 2020 user@localhost DISPLAY=:200 setxkbmap -layout ch
 
