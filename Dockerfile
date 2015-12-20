@@ -1,10 +1,16 @@
-FROM ubuntu:15.10
+# Note: Using 15.10 and the winswitch repo leads to:  Error starting Xvfb: [Errno 2] No such file or directory
+FROM ubuntu:14.04
 # Expose the SSH port
 EXPOSE 22
 
+RUN apt-get install -y curl \
+    && curl http://winswitch.org/gpg.asc | apt-key add - \
+    && echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list
+
+
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server \
-    xpra x11-apps xterm \
-    xserver-xephyr i3
+    x11-apps xterm \
+    xserver-xephyr i3 xpra
 
 # Create OpenSSH privilege separation directory
 RUN mkdir /var/run/sshd 
@@ -16,5 +22,9 @@ RUN mkdir /home/user/.ssh/
 
 VOLUME /home/user
 
-# Start SSH so we are ready to make a tunnel
-CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user && /usr/sbin/sshd -D
+ENV DISPLAY=:100
+
+RUN echo DISPLAY=$DISPLAY >> /etc/environment
+
+# Start SSH anx Xpra
+CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user && /usr/sbin/sshd && su user -c "xpra start $DISPLAY --no-daemon"
