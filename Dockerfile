@@ -4,7 +4,7 @@ FROM ubuntu:14.04
 EXPOSE 22
 
 RUN apt-get install -y curl \
-    && curl http://winswitch.org/gpg.asc | apt-key add - \
+    && curl https://winswitch.org/gpg.asc | apt-key add - \
     && echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list
 
 
