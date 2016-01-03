@@ -27,4 +27,7 @@ ENV DISPLAY=:100
 RUN echo DISPLAY=$DISPLAY >> /etc/environment
 
 # Start SSH anx Xpra
-CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user && /usr/sbin/sshd && rm -f /tmp/.X100-lock && su user -c "xpra start $DISPLAY --no-daemon"
+CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user \ 
+    && /usr/sbin/sshd && rm -f /tmp/.X100-lock \ 
+    && su user -c "xpra start $DISPLAY && sleep 1 && cp ~/.xpra/run-xpra /tmp/run-xpra \
+    && cat /tmp/run-xpra | grep -v affinity > ~/.xpra/run-xpra && sleep infinity"
