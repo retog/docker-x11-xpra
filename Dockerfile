@@ -1,11 +1,10 @@
-# Note: Using 15.10 and the winswitch repo leads to:  Error starting Xvfb: [Errno 2] No such file or directory
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 # Expose the SSH port
 EXPOSE 22
 
-RUN apt-get install -y curl \
+RUN apt-get update && apt-get install -y curl \
     && curl https://winswitch.org/gpg.asc | apt-key add - \
-    && echo "deb http://winswitch.org/ trusty main" > /etc/apt/sources.list.d/winswitch.list
+    && echo "deb http://winswitch.org/beta/ xenial main" > /etc/apt/sources.list.d/winswitch.list 
 
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server \
