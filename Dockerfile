@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y curl \
 
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server \
-    x11-apps xterm \
+    x11-apps xterm language-pack-en-base \
     xserver-xephyr i3 xpra
 
 # Create OpenSSH privilege separation directory
