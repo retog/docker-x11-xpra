@@ -23,7 +23,8 @@ VOLUME /home/user
 
 ENV DISPLAY=:100
 
-RUN echo DISPLAY=$DISPLAY >> /etc/environment
+ADD xpra-display /tmp/xpra-display
+RUN echo "$(cat /tmp/xpra-display)\n$(cat /etc/bash.bashrc)" > /etc/bash.bashrc 
 
 # Start SSH anx Xpra
 CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user \ 

@@ -1,0 +1,3 @@
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:100
+fi
