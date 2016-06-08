@@ -46,4 +46,8 @@ And start xclock on Xephyr
 You may need to adapt the keyboard layout
 
     ssh -p 2020 user@localhost DISPLAY=:200 setxkbmap -layout ch
+    
+Simial projects
+
+ - A more comprehensive framework to run desktop applications in Docker is [subuser](http://subuser.org/)
 
