@@ -4,7 +4,7 @@ EXPOSE 22
 
 RUN apt-get update && apt-get install -y curl \
     && curl https://winswitch.org/gpg.asc | apt-key add - \
-    && echo "deb http://winswitch.org/beta/ xenial main" > /etc/apt/sources.list.d/winswitch.list 
+    && echo "deb http://winswitch.org/ xenial main" > /etc/apt/sources.list.d/winswitch.list 
 
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server \
