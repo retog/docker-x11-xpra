@@ -26,6 +26,9 @@ ENV DISPLAY=:100
 ADD xpra-display /tmp/xpra-display
 RUN echo "$(cat /tmp/xpra-display)\n$(cat /etc/bash.bashrc)" > /etc/bash.bashrc 
 
+RUN echo AddressFamily inet >> /etc/ssh/sshd_config
+
+
 # Start SSH anx Xpra
 CMD mkdir -p /home/user/.ssh/ && chown -R user:user /home/user \ 
     && /usr/sbin/sshd && rm -f /tmp/.X100-lock \ 
