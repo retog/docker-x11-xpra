@@ -17,7 +17,7 @@ Copy your ssh public key
 
 Start xclock
 
-    ssh -p 2020 user@localhost xclock
+    ssh -p 2020 -X user@localhost xclock
 
 The DISPLAY variable set to `:100` which the virtual display provided by Xpra. You 
 will not see the application until a client connects to the Xpra server.
@@ -28,12 +28,12 @@ To connect a client from the local machine
 
 As any time you can start more applications
 
-    ssh -p 2020 user@localhost xeyes
+    ssh -p 2020 -X user@localhost xeyes
 
 If rather than having "rootless" remote applications you would like to have a whole
 remote desktop you can start start Xephyr as display `:200`
 
-    ssh -p 2020 user@localhost "Xephyr -ac -br -noreset -screen 800x600 :200" &
+    ssh -p 2020 -X user@localhost "Xephyr -ac -br -noreset -screen 800x600 :200" &
 
 Start i3 as display manager
 
