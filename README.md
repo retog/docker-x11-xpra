@@ -1,6 +1,8 @@
 # docker-x11-xpra
-A docker image proving a basis for X applications accessible via ssh with or 
-without [Xpra](http://xpra.org/) and optionally within Xephyr/i3
+A docker image proving a basis for X applications accessible via ssh ~~with or 
+without [Xpra](http://xpra.org/) and~~ optionally within Xephyr/i3
+
+Xpra is currently disabled because of https://github.com/retog/docker-x11-xpra/issues/7
 
 The docker image comes witha small set o X-Application like xclock, xterm, 
 xeyes it is meant to be extended to provide the required applications.
@@ -18,13 +20,6 @@ Copy your ssh public key
 Start xclock
 
     ssh -p 2020 -X user@localhost xclock
-
-The DISPLAY variable set to `:100` which the virtual display provided by Xpra. You 
-will not see the application until a client connects to the Xpra server.
-
-To connect a client from the local machine
-  
-    xpra --ssh="ssh -p 2020" attach ssh:user@localhost:100
 
 As any time you can start more applications
 
@@ -47,7 +42,7 @@ You may need to adapt the keyboard layout
 
     ssh -p 2020 user@localhost DISPLAY=:200 setxkbmap -layout ch
     
-Simial projects
+Similar projects
 
  - A more comprehensive framework to run desktop applications in Docker is [subuser](http://subuser.org/)
 
